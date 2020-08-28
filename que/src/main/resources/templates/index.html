@@ -7,10 +7,13 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
           integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+
+
 </head>
 <body>
 
-<div class="container mt-5">
+<div class="container mt-5" >
     <form class="form-group">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -36,7 +39,7 @@
 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="show">
                 <tr th:each="tickets:${tickets}">
                     <td><a th:href="@{/tickets/{id} (id=${tickets.getId()})}"
                            th:text="${tickets.getId()}"></a>
@@ -66,5 +69,19 @@
         </div>
     </div>
 </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTimeout(function () {
+
+            location.reload(true);
+        }, 5000);
+    });
+</script>
 </body>
 </html>
