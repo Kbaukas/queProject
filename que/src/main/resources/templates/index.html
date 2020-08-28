@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-5">
+    <form class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary" type="submit">Paieska</button>
+            </div>
+
+        </div>
+
+    </form>
+    <div class="card">
+        <h1 class="mx-auto mt-5">Tickets</h1>
+        <div class="card-body">
+            <a class="btn btn-success mt-2" th:href="@{'/tickets/create'}" th:text="Create"></a>
+            <table class="table table-striped table-hover mt-5">
+                <thead>
+                <tr class="table-info">
+                    <th>id</th>
+                    <th>numeris</th>
+                    <th>start</th>
+                    <th>end</th>
+
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tickets:${tickets}">
+                    <td><a th:href="@{/tickets/{id} (id=${tickets.getId()})}"
+                           th:text="${tickets.getId()}"></a>
+                    </td>
+                    <td><a th:text="${tickets.getSerialNumber()}"></a></td>
+                    <td><a th:text="${tickets.getStartTime()}"></a></td>
+                    <td><a th:text="${tickets.getEndTime()}"></a></td>
+
+<!--                        <form th:action="@{/studentai/delete}" th:method="POST">-->
+<!--                            <input th:name="id" type="hidden" th:value="${studentas.getId()}" />-->
+
+<!--                            <button class="btn btn-danger" type="submit" onClick="return confirm('Ar tikrai norite istrinti?')" th:text="Delete"/>-->
+<!--                        </form>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <form th:action="@{/studentai/edit}" th:object="${studentas}" th:method="POST">-->
+<!--                            <input name="id" type=hidden th:value="${studentas.getId()}" />-->
+<!--                            <button class="btn btn-primary" type="submit"  th:text="Edit"/>-->
+<!--                        </form>-->
+<!--                    </td>-->
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
