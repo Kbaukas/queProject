@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleafe.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,16 +9,51 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
           integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-
 </head>
 <body>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">TIcket System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tickets">Display Screen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tickets/create">Book Ticket</a>
+                </li> <li class="nav-item">
+                <a class="nav-link" href="/specialists/">Login</a>
+            </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
+
+<div sec:authorize="isAuthenticated()">
+    Welcome <span sec:authentication="name">Username</span>
+</div>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+
+
+</form>
 <div class="container mt-5">
     <form class="form-group">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary" type="submit">Paieska</button>
-            </div>
+<!--            <div class="input-group-prepend">-->
+<!--                <button class="btn btn-outline-secondary" type="submit">Paieska</button>-->
+<!--            </div>-->
 
         </div>
 

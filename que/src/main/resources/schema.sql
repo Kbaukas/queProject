@@ -19,5 +19,6 @@ CREATE TABLE `specialists` (
   `last_name` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `speciality`enum('ADMIN','ACCOUNTANT','MANAGER','SUPPORT') NOT NULL,
+  `role`enum('ADMIN','CUSTOMER','WORKER'),
   PRIMARY KEY (`id`)
 );

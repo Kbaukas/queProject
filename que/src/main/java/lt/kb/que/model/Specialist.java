@@ -1,7 +1,9 @@
 package lt.kb.que.model;
 
 import com.sun.istack.NotNull;
+import lt.kb.que.util.Role;
 import lt.kb.que.util.Speciality;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +18,13 @@ public class Specialist {
     private String userName;
     private String firstName;
     private String lastName;
+    private String password;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", columnDefinition = "ENUM('ADMIN','CUSTOMER','WORKER')", nullable = false)
+    private Role role;
+
     @OneToMany(mappedBy = "specialist", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
@@ -25,6 +34,14 @@ public class Specialist {
 
     @Column(name = "speciality", columnDefinition = "ENUM('ADMIN','ACCOUNTANT','MANAGER','SUPPORT')", nullable = false)
     private Speciality speciality;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public Speciality getSpeciality() {
         return speciality;
@@ -72,5 +89,13 @@ public class Specialist {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

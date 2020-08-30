@@ -17,12 +17,13 @@ INSERT INTO `specialists`
 `speciality`,
 `first_name`,
 `last_name`,
+`role`,
 `password`)
 VALUES
-(1, 'manageris5', 'MANAGER', 'Inga', 'Super', 'asdasdasdasda'),
-(2, 'adminas2','ADMIN', 'Onute', 'Gera', 'asdasdasdasda'),
-(3, 'supportas5','SUPPORT', 'Jonas', 'Nebicas', 'asdasdasdasda'),
-(4, 'buhalteris1','ACCOUNTANT', 'Petras', 'Bicas', 'asdasdasdasda');
+(1, 'manageris5', 'MANAGER', 'Inga', 'Super', 'WORKER', '$2a$10$ffB6h4bHKUSNSCbVCc1JQesz0q/kXcX/YDjacZJhNveM/bwfpkoaO'),
+(2, 'adminas2','ADMIN', 'Onute', 'Gera', 'WORKER', '$2a$10$7joGnJVLaJTUuIfeNM.yZ.BU/QHV5oyb03/494msJXO/tGMf52zB.'),
+(3, 'supportas5','SUPPORT', 'Jonas', 'Nebicas', 'WORKER', '$2a$10$iGJznxk5RCmqyNC2zrbJQOCfbDTbmfy8CAJ.EvX/mDbxH3exWAQZC'),
+(4, 'buhalteris1','ACCOUNTANT', 'Petras', 'Bicas', 'WORKER', '$2a$10$76DGy7IlcDYvgkfWqY0/4OgttOBoQQDewMId/4ACbtDJUKHyVhiIu');
 
 
 
