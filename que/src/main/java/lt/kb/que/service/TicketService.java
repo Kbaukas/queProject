@@ -32,7 +32,10 @@ public class TicketService {
     public List<Ticket> findAll() {
         return ticketDao.findAll();
     }
-    public void addNewTicket(Ticket ticket) {
+
+
+
+    public Ticket addNewTicket(Ticket ticket) {
         List<Ticket> tickets = ticketDao.findAll().stream().filter(a -> a.getSpecialist()
                 .getSpeciality().equals(ticket.getSpecialist().getSpeciality())).collect(Collectors.toList());
 
@@ -57,6 +60,8 @@ public class TicketService {
         System.out.println(newTicket);
 
         ticketDao.save(newTicket);
+        System.out.println("iDDDD "+newTicket.getId());
+        return newTicket;
     }
     public Optional<Ticket> getBySerialNumber(String serialNumber) {
         Optional<Ticket> ticket = ticketDao.findAll().stream().filter(a -> a.getSerialNumber().equals(serialNumber)).findAny();

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleafe.org/thymeleaf-extras-springsecurity5">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"
+    >
     <title>Ticket System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,7 +16,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">TIcket System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -27,9 +30,10 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/tickets/create">Book Ticket</a>
-            </li> <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-        </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/specialists" tabindex="-1">Specialists</a>
             </li>
@@ -48,6 +52,44 @@
         </ul>
     </div>
 </nav>
+
+<div class="card col-5 ml-auto mr-auto"  >
+    <h1 class="mx-auto mt-5">Your Ticket Details</h1>
+    <div class="card-body">
+
+        <div th:fragment="tableBody(tickets,totalPages,currentPage)" id="lenta">
+            <table class="table table-striped table-hover mt-5">
+                <thead>
+                <tr class="table-info">
+                    <th>Your Number in The Que</th>
+                    <th>Your Number in The Que</th>
+                    <th>Ticket Number</th>
+                    <th>Time Left</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+
+                    <td style="background-color: aqua" th:text="${ticket.specialist.getTickets().indexOf(ticket)+1}"></td>
+                    <td style="background-color: aqua" th:text="${ticket.getSerialNumber()}"></td>
+
+
+                    <td style="background-color: aqua"
+                        th:with="timeLeft=(${ticket.getStartTime().getTime()} - ${#execInfo.now.getTime().getTime()} )/(1000*60)">
+                        <p th:text="${#numbers.formatDecimal(timeLeft,0,0)} +' min'  "></p>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <b th:text="${#execInfo.now.getTime()}"></b>
+
+    </div>
+
 
 </body>
 </html>
