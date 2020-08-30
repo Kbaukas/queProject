@@ -43,6 +43,7 @@ public UserDetailsService userDetailsService(){
                .antMatchers("/specialists/**").authenticated()
                .and()
                .formLogin().permitAll()
+               .defaultSuccessUrl("/specialists", true)
                .and()
                .logout().permitAll()
                ;

@@ -30,11 +30,17 @@
             </li> <li class="nav-item">
                 <a class="nav-link" href="/specialists/">Login</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+
         </ul>
     </div>
 </nav>
+<div class="card">
+
+    <div class="card-body">
+
+   <h1 style="text-align: center">Welcome To Ticket System</h1>
+        <b th:text="${#execInfo.now.getTime()}"></b>
+
+    </div>
 </body>
 </html>

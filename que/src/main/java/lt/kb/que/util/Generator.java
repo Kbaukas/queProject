@@ -16,11 +16,15 @@ public class Generator {
         String serialNr = String.format("%04d", number);
         if (!tickets.isEmpty()) {
             List<String> serialNrList = tickets.stream().map(Ticket::getSerialNumber).collect(Collectors.toList());
-            if (serialNrList.contains(serialNr)) {
-                serialNr(tickets);
-            } else {
-                return serialNr;
+
+            for (String s:serialNrList) {
+                if(s.equals(serialNr)){
+                    serialNr(tickets);
+                }
+
             }
+
+
         }
             return serialNr;
 
