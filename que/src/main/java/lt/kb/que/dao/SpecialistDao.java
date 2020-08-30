@@ -18,6 +18,8 @@ public interface SpecialistDao extends JpaRepository<Specialist,Integer> {
     Optional<Specialist> findById(int id);
     @Query("select s from Specialist s where s.speciality= :filter")
     List<Specialist> findBySpeciality(@Param("filter") Enum filter);
+ @Query("select s from Specialist s where s.userName= :filter")
+    List<Specialist> findByUserName(@Param("filter") String filter);
 
 
 }

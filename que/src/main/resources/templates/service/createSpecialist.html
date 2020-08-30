@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> New Ticket</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <form th:action="@{/specialists/create}" th:object="${specialist}" method="post">
+                    <div class="row">
+                        <input type="hidden" th:field="*{id}"/>
+                        <label>userName:</label>
+
+                        <input type="text" class="form-control" th:field="*{userName}"/>
+                        <label>First name</label>
+                        <input type="text" class="form-control"
+                               th:field="*{firstName}"/>
+
+                        <label>Last name</label>
+                        <input type="text" class="form-control"
+                               th:field="*{lastName}"/>
+
+                        <select th:field="*{speciality}">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="MANAGER">MANAGER</option>
+                            <option value="SUPPORT">SUPPORT</option>
+                            <option value="ACCOUNTANT">ACCOUNTANT</option>
+                        </select>
+
+                        <label>Password: </label>
+
+                        <input type="password" class="form-control" th:field="*{password}"/>
+
+                        <input type="submit" name="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

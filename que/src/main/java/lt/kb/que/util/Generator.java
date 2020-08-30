@@ -15,7 +15,7 @@ public class Generator {
         int number = new Random().nextInt(9999);
         String serialNr = String.format("%04d", number);
         if (!tickets.isEmpty()) {
-            List<String> serialNrList = tickets.stream().map(t -> t.getSerialNumber()).collect(Collectors.toList());
+            List<String> serialNrList = tickets.stream().map(Ticket::getSerialNumber).collect(Collectors.toList());
             if (serialNrList.contains(serialNr)) {
                 serialNr(tickets);
             } else {
