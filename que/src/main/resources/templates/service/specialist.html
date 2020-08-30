@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ticket System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
@@ -12,63 +12,83 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">TIcket System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tickets">Display Screen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tickets/create">Book Ticket</a>
+            </li> <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/specialists" tabindex="-1">Specialists</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/specialists" tabindex="-1" sec:authentication="name">Specialists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/specialists" tabindex="-1">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Logout"/>
+
+
+                    </form>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container mt-5">
     <form class="form-group">
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary" type="submit">Paieska</button>
-            </div>
+
 
         </div>
 
     </form>
     <div class="card">
-        <h1 class="mx-auto mt-5">Tickets</h1>
+        <h1 class="mx-auto mt-5">Specialists</h1>
         <div class="card-body">
-            <a class="btn btn-success mt-2" th:href="@{'/tickets/create'}" th:text="Create"></a>
-            <h1 th:text="${specialist.getUserName()}"></h1>
+                        <h1 th:text="${specialist.getUserName()}"></h1>
             <table class="table table-striped table-hover mt-5">
                 <thead>
                 <tr class="table-info">
                     <th>id</th>
-                    <th>numeris</th>
-                    <th>start</th>
-                    <th>end</th>
+                    <th>serial number</th>
+                    <th>start time</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Cancel</th>
 
 
                 </tr>
                 </thead>
                 <tbody id="show">
-                <tr th:if="${ticket.getId()==1}" th:each="ticket:${specialist.getTickets()}">
+                <tr th:each="ticket:${specialist.getTickets()}">
 
 
-                    <td><a style="background-color: aqua" th:text="${ticket.getId()}"></a>
-                    </td>
-                    <td><a style="background-color: aqua"
-                           th:text="${ticket.getSerialNumber()}"></a></td>
+                    <td><a  th:text="${ticket.getId()}"></a> </td>
+                    <td><a  th:text="${ticket.serialNumber}"></a></td>
 
-                    <td><a style="background-color: aqua" th:text="${ticket.getStartTime()}"></a>
-                    </td>
-                    <td><a style="background-color: aqua"
-                           th:text="${ticket.getEndTime()}"></a></td>
-
-
-                </tr>
-                <tr th:unless="${ticket.getId()==1}" th:each="ticket:${specialist.getTickets()}">
-
-
-                    <td><a style="background-color: red" th:text="${ticket.getId()}"></a>
-                    </td>
-                    <td><a style="background-color: red"
-                           th:text="${ticket.getSerialNumber()}"></a></td>
-
-                    <td><a style="background-color: red" th:text="${ticket.getStartTime()}"></a>
-                    </td>
-                    <td><a style="background-color: red"
-                           th:text="${ticket.getEndTime()}"></a></td>
+                    <td><a th:text="${ticket.startTime}"></a></td>
+                    <td><a th:text="Start"></a></td>
+                    <td><a th:text="End"></a></td>
+                    <td><a th:text="Cancel"></a></td>
 
 
                 </tr>
+
 
 
                 </tbody>
