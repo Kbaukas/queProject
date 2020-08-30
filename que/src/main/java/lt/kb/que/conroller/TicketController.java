@@ -98,8 +98,9 @@ public class TicketController {
 
         System.out.println(ticket);
 
-        ticketService.addNewTicket(ticket);
-        return "redirect:/tickets";
+       Ticket newTicket=ticketService.addNewTicket(ticket);
+       model.addAttribute("ticket",newTicket);
+        return "customerPages/ticket";
     }
 
 }
