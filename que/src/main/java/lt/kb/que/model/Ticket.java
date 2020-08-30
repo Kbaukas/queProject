@@ -1,9 +1,15 @@
 package lt.kb.que.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
+import lt.kb.que.util.Speciality;
+import lt.kb.que.util.TicketState;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Table(name = "tickets")
@@ -12,21 +18,46 @@ public class Ticket {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private  String serialNumber="";
+    private String serialNumber = "";
     private Timestamp startTime;
     private Timestamp endTime;
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "specialist_id")
+    private Specialist specialist;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
 
+    @Column(name = "state", columnDefinition = "ENUM('CANCELLED','WAITING','SERVING')", nullable = false)
+    private TicketState ticketState;
 
     public Ticket() {
-        serialNumber = UUID.randomUUID().toString();
-
+//        serialNumber = UUID.randomUUID().toString();
+        ticketState=TicketState.WAITING;
 
     }
 
+    public TicketState getTicketState() {
+        return ticketState;
+    }
 
+    public void setTicketState(TicketState ticketState) {
+        this.ticketState = ticketState;
+    }
 
+    public Long timeLeft(Long now){
+//         now=Timestamp.valueOf(LocalDateTime.now());
+   return (startTime.getTime() - now)/(1000*60);
+}
 
+    public Specialist getSpecialist() {
+        return specialist;
+    }
+
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
+    }
 
     public int getId() {
         return id;
@@ -36,7 +67,7 @@ public class Ticket {
         this.id = id;
     }
 
-    @Basic
+
     @Column(name = "serial_number", nullable = false, length = 45)
     public String getSerialNumber() {
         return serialNumber;
@@ -46,8 +77,8 @@ public class Ticket {
         this.serialNumber = serialNumber;
     }
 
-    @Basic
-    @Column(name = "start_time", nullable = false)
+
+    @Column(name = "start_time", nullable = true)
     public Timestamp getStartTime() {
         return startTime;
     }
@@ -56,7 +87,7 @@ public class Ticket {
         this.startTime = startTime;
     }
 
-    @Basic
+
     @Column(name = "end_time", nullable = true)
     public Timestamp getEndTime() {
         return endTime;

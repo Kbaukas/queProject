@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<div class="container mt-5">
+    <form class="form-group">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary" type="submit">Paieska</button>
+            </div>
+
+        </div>
+
+    </form>
+    <div class="card">
+        <h1 class="mx-auto mt-5">Tickets</h1>
+        <div class="card-body">
+            <a class="btn btn-success mt-2" th:href="@{'/tickets/create'}" th:text="Create"></a>
+            <table class="table table-striped table-hover mt-5">
+                <thead>
+                <tr class="table-info">
+                    <th>id</th>
+                    <th>Vardas</th>
+                    <th>Pavarde</th>
+                    <th>Username</th>
+                    <th>Speciality</th>
+
+
+                </tr>
+                </thead>
+                <tbody id="show">
+                <tr th:each="specialist:${specialists}">
+                    <td><a th:href="@{/specialists/{id} (id=${specialist.getId()})}"
+                           th:text="${specialist.getId()}"></a></td>
+                    <td><a th:text="${specialist.getFirstName()}"></a></td>
+                    <td><a th:text="${specialist.getLastName()}"></a></td>
+                    <td><a th:text="${specialist.getUserName()}"></a></td>
+                    <td><a th:text="${specialist.speciality}"></a></td>
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
