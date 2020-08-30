@@ -20,34 +20,13 @@
             <div class="col-md-8">
                 <form th:action="@{/tickets/create}" th:object="${ticket}" method="post">
                     <div class="row">
-<!--                        <div class="form-group col-md-6">-->
-<!--                            <label for="serialnumber" class="col-form-label">serialnumber</label>-->
-<!--                            <input type="text" th:field="*{serialNumber}" class="form-control"/>-->
-                            <input type="text" th:field="*{startTime}" class="form-control"/>
-                            <input type="text" th:field="*{endTime}" class="form-control"/>
-<!--                            <input type="" th:field="*{id}" class="form-control"/>-->
-<!--                            <input type="text" th:field="*{serialNumber}" class="form-control"/>-->
-<!--                                   placeholder="Vardas">-->
-<!--&lt;!&ndash;                            <span th:if="${#fields.hasErrors('vardas')}" th:errors="${studentas.vardas}"&ndash;&gt;-->
-<!--&lt;!&ndash;                                  class="text-danger"></span>&ndash;&gt;-->
-<!--                        </div>-->
 
-                        <!--                        <div class="form-group col-md-8">-->
-                        <!--                            <label for="pavarde" class="col-form-label">Pavarde</label>-->
-                        <!--                            <input type="text" th:field="*{pavarde}" class="form-control" id="pavarde" placeholder="pavarde">-->
-                        <!--                            <span th:if="${#fields.hasErrors('pavarde')}" th:errors="*{pavarde}" class="text-danger"></span>-->
-                        <!--                        </div>-->
-
-                        <!--                        <div class="form-group col-md-8">-->
-                        <!--                            <label for="email" class="col-form-label">Email</label>-->
-                        <!--                            <input type="email" th:field="${studentas.elPastas}" class="form-control" id="email" placeholder="Email">-->
-                        <!--                            <span th:if="${#fields.hasErrors('elPastas')}" th:errors="${studentas.elPastas}"-->
-                        <!--                                  class="text-danger"></span>-->
-                        <!--                        </div>-->
-
-                        <!--                        <div class="form-group col-md-8">-->
-                        <!--                            <button type="submit" class="btn btn-primary" >Issaugome</button>-->
-                        <!--                        </div>-->
+                         <select th:field="*{specialist.speciality}">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="MANAGER">MANAGER</option>
+                            <option value="SUPPORT">SUPPORT</option>
+                            <option value="ACCOUNTANT">ACCOUNTANT</option>
+                         </select>
                         <input type="submit" name="submit">
                     </div>
                 </form>
