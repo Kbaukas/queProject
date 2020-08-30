@@ -21,13 +21,13 @@ public class SpecialistController {
     String showAll(Model model){
         List<Specialist> specialists=specialistService.findAll();
         model.addAttribute("specialists",specialists);
-        return "specialists";
+        return "service/specialists";
 
     }
     @GetMapping("/specialists/{id}")
     public String getSpecialistById(@PathVariable int id,Model model) throws Exception {
        Specialist specialist=specialistService.findById(id).get();
        model.addAttribute("specialist",specialist);
-       return "specialist";
+       return "service/specialist";
     }
 }
