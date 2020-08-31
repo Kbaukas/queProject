@@ -24,15 +24,15 @@ public class TicketService {
     @Autowired
     SpecialistService specialistService;
 
-   public Page<Ticket> findPage(int pageNo, int pageSize){
-        Pageable pageable= PageRequest.of(pageNo -1,pageSize);
+    public Page<Ticket> findPage(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         return ticketDao.findAll(pageable);
 
     }
+
     public List<Ticket> findAll() {
         return ticketDao.findAll();
     }
-
 
 
     public Ticket addNewTicket(Ticket ticket) {
@@ -41,15 +41,15 @@ public class TicketService {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + tickets);
         Ticket newTicket = new Ticket();
-        if(tickets.isEmpty()) {
+        if (tickets.isEmpty()) {
             LocalDateTime now = LocalDateTime.now();
             newTicket.setStartTime(Timestamp.valueOf(now));
-        }else{
+        } else {
 
-            long t=tickets.get(tickets.size()-1).getStartTime().getTime();
-            long m=ticket.getSpecialist().getSpeciality().getSessionTime()*60*1000;
+            long t = tickets.get(tickets.size() - 1).getStartTime().getTime();
+            long m = ticket.getSpecialist().getSpeciality().getSessionTime() * 60 * 1000;
 
-            Timestamp theNewTimestamp=new Timestamp (t+m);
+            Timestamp theNewTimestamp = new Timestamp(t + m);
             newTicket.setStartTime(theNewTimestamp);
         }
         newTicket.setEndTime(ticket.getEndTime());
@@ -60,11 +60,28 @@ public class TicketService {
         System.out.println(newTicket);
 
         ticketDao.save(newTicket);
-        System.out.println("iDDDD "+newTicket.getId());
+        System.out.println("iDDDD " + newTicket.getId());
         return newTicket;
     }
+
     public Optional<Ticket> getBySerialNumber(String serialNumber) {
         Optional<Ticket> ticket = ticketDao.findAll().stream().filter(a -> a.getSerialNumber().equals(serialNumber)).findAny();
-       return ticket;
+        return ticket;
+    }
+
+    public void removeTicket(Ticket ticket) {
+        if (ticket != null)
+            ticketDao.delete(ticket);
+    }
+
+    public Optional<Ticket> findbyId(int id) {
+        return ticketDao.findById(id);
+    }
+
+    public List<Ticket> findBySerialNr(String nr) {
+        List<Ticket> tickets = ticketDao.findBySerialNumber(nr);
+
+        return tickets;
     }
 }
+

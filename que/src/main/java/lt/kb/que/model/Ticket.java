@@ -22,7 +22,7 @@ public class Ticket {
     private Timestamp startTime;
     private Timestamp endTime;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "specialist_id")
     private Specialist specialist;
 

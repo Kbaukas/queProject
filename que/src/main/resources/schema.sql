@@ -6,7 +6,7 @@ CREATE TABLE `tickets` (
   `serial_number` varchar(45) NOT NULL,
   `start_time` datetime DEFAULT NULL ,
   `end_time` datetime DEFAULT NULL,
-   `state`enum('CANCELLED','WAITING','SERVING') NOT NULL,
+   `state`enum('CANCELLED','WAITING','SERVING', 'END') NOT NULL,
 
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
