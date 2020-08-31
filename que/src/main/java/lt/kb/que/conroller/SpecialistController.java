@@ -28,6 +28,9 @@ public class SpecialistController {
     @GetMapping("/specialists/{id}")
     public String getSpecialistById(@PathVariable int id,Model model) {
        Optional<Specialist> specialist=specialistService.findById(id);
+       if(!specialist.isPresent()){
+           return "error/index";
+       }
         specialist.ifPresent(value -> model.addAttribute("specialist", value));
        return "service/specialist";
     }

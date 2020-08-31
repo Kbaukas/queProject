@@ -13,48 +13,23 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">TIcket System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tickets">Display Screen</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tickets/create">Book Ticket</a>
-            </li> <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-        </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/specialists" tabindex="-1" >Specialists</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div class="container my-5">
+<nav th:insert="customerPages/find.html :: nav()"></nav>
+<div style="text-align: center; background-color: antiquewhite" class="card row col-6 ml-auto mr-auto mt-5">
     <h3> New Ticket</h3>
-    <div class="card">
+    <div class="card" style="background-color: aliceblue">
         <div class="card-body">
-            <div class="col-md-8">
-                <form th:action="@{/tickets/create}" th:object="${ticket}" method="post">
-                    <div class="row">
 
-                         <select th:field="*{specialist.speciality}">
-                            <option value="ADMIN">ADMIN</option>
-                            <option value="MANAGER">MANAGER</option>
-                            <option value="SUPPORT">SUPPORT</option>
-                            <option value="ACCOUNTANT">ACCOUNTANT</option>
-                         </select>
-                        <input type="submit" name="submit">
-                    </div>
+                <form  th:action="@{/tickets/create}" th:object="${ticket}" method="post">
+
+                    <select  th:field="*{specialist.speciality}">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="MANAGER">MANAGER</option>
+                        <option value="SUPPORT">SUPPORT</option>
+                        <option value="ACCOUNTANT">ACCOUNTANT</option>
+                    </select>
+                    <input type="submit" name="submit">
                 </form>
-            </div>
+
         </div>
     </div>
 </div>

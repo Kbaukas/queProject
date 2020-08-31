@@ -38,14 +38,15 @@ public UserDetailsService userDetailsService(){
     @Override
     protected void configure(HttpSecurity http) throws Exception {
        http.authorizeRequests()
-               .antMatchers("/tickets**").permitAll()
+               .antMatchers("/tickets**").authenticated()
                .antMatchers("/specialists**").authenticated()
                .antMatchers("/specialists/**").authenticated()
                .and()
                .formLogin().permitAll()
-               .defaultSuccessUrl("/specialists", true)
+               .defaultSuccessUrl("/tickets", true)
                .and()
                .logout().permitAll()
+               .logoutSuccessUrl("/")
                ;
     }
 
