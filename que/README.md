@@ -2,7 +2,7 @@
 
 Internship for NFQ.
 
-## To Run app
+## Tools
 
 Application is build using gradle. 
 Tools have been used:
@@ -11,6 +11,8 @@ Tools have been used:
 - Spring boot
 - Spring security
 - Thymeleaf
+
+## To Run app
 
 App can be run using gradle command
 ````
