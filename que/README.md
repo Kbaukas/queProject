@@ -5,6 +5,7 @@ Internship for NFQ.
 ## To Run app
 
 Application is build using gradle. 
+Tools have been used: Intellij, Java 11, Spring boot, Spring security,Thymeleaf
 
 App can be run using gradle command
 ````
