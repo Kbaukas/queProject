@@ -38,6 +38,7 @@ Here are links to make more friendly use:
 - Book ticket . Create ticket to the specific specialist (no login needed)
 - Find Ticked (find ticked by serial number)
 
-
+## Documentation
+Swagger documentation can be found here: http://localhost:8080/swagger-ui.html
 
 
