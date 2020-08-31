@@ -2,6 +2,7 @@ package lt.kb.que.conroller;
 
 import lt.kb.que.model.Specialist;
 import lt.kb.que.model.Ticket;
+import lt.kb.que.security.WebSecurity;
 import lt.kb.que.service.SpecialistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +32,13 @@ public class SpecialistController {
 
     @GetMapping("/specialists/{id}")
     public String getSpecialistById(@PathVariable int id, Model model) {
+
+        HttpServletRequest request = null;
+
+//      String user=request.getUserPrincipal();
         System.out.println("-----------------------------------------------------");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+
+        System.out.println( request.getRemoteUser());
         Optional<Specialist> specialist = specialistService.findById(id);
         if (!specialist.isPresent()) {
             return "error/index";

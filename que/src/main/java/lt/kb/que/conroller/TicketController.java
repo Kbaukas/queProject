@@ -2,6 +2,7 @@ package lt.kb.que.conroller;
 
 import lt.kb.que.model.Ticket;
 import lt.kb.que.service.TicketService;
+import lt.kb.que.util.Generator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -24,35 +25,15 @@ public class TicketController {
 
     @GetMapping("/fragments")
     public String fragment(Model model) {
-        Page<Ticket> page = ticketService.findPage(1, 5);
-        List<Ticket> tickets = new ArrayList<>();
-        tickets = page.getContent().stream().sorted(Comparator.comparingInt(Ticket::getId)).collect(Collectors.toList());
+        int pageSize = 5;
 
-        model.addAttribute("tickets", tickets);
+        newList(model, pageSize);
 
 
         return "fragments.html";
 
 
     }
-
-
-//
-//    @GetMapping("fragments")
-//    public String fragment(@PathVariable (value = "pageNo") int pageNo, Model model) {
-//        int pageSize=5;
-//        Page<Ticket> page=ticketService.findPage(1,pageSize);
-//        List<Ticket> tickets;
-//        tickets = page.getContent().stream().sorted((a,b)->a.getId()-b.getId()).collect(Collectors.toList());
-//
-//        model.addAttribute("tickets", tickets);
-//        model.addAttribute("currentPage", pageNo);
-//        model.addAttribute("totalPages", page.getTotalPages());
-//        model.addAttribute("totalTickets", page.getTotalElements());
-//        return "fragments.html" ;
-//
-//
-//    }
 
 
     @GetMapping("tickets")
@@ -67,16 +48,25 @@ public class TicketController {
     String getPage(@PathVariable(value = "pageNo") int pageNo, Model model) {
         int pageSize = 5;
         Page<Ticket> page = ticketService.findPage(pageNo, pageSize);
-        List<Ticket> tickets = new ArrayList<>();
-        tickets = page.getContent().stream().sorted((a, b) -> a.getId() - b.getId()).collect(Collectors.toList());
 
-        model.addAttribute("tickets", tickets);
+        newList(model, pageSize);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalTickets", page.getTotalElements());
 
         return "service/tickets";
 
+    }
+
+    private void newList(Model model, int pageSize) {
+        List<Ticket> tickets = ticketService.findAll();
+
+        tickets = tickets.stream().sorted((a, b) -> (int) (Generator.timeLeft(a) - Generator.timeLeft(b))).collect(Collectors.toList());
+        List<Ticket> newList = new ArrayList<>();
+        for (int i = 0; i < pageSize - 1; i++) {
+            newList.add(tickets.get(i));
+        }
+        model.addAttribute("tickets", newList);
     }
 
     @GetMapping("/tickets/create")

@@ -46,10 +46,7 @@ public class Ticket {
         this.ticketState = ticketState;
     }
 
-    public Long timeLeft(Long now){
-//         now=Timestamp.valueOf(LocalDateTime.now());
-   return (startTime.getTime() - now)/(1000*60);
-}
+
 
     public Specialist getSpecialist() {
         return specialist;
