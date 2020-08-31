@@ -11,6 +11,7 @@ Tools have been used:
 - Spring boot
 - Spring security
 - Thymeleaf
+- H2 embedded DB
 
 ## To Run app
 
