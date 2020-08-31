@@ -25,15 +25,36 @@ public class TicketController {
 
     @GetMapping("/fragments")
     public String fragment(Model model) {
-        int pageSize = 5;
+        Page<Ticket> page = ticketService.findPage(1, 5);
 
-        newList(model, pageSize);
+
+        List<Ticket> tickets = page.getContent().stream().sorted((a, b) -> (int) (Generator.timeLeft(a) - Generator.timeLeft(b))).collect(Collectors.toList());
+
+        model.addAttribute("tickets", tickets);
 
 
         return "fragments.html";
 
 
     }
+
+
+//
+//    @GetMapping("fragments")
+//    public String fragment(@PathVariable (value = "pageNo") int pageNo, Model model) {
+//        int pageSize=5;
+//        Page<Ticket> page=ticketService.findPage(1,pageSize);
+//        List<Ticket> tickets;
+//        tickets = page.getContent().stream().sorted((a,b)->a.getId()-b.getId()).collect(Collectors.toList());
+//
+//        model.addAttribute("tickets", tickets);
+//        model.addAttribute("currentPage", pageNo);
+//        model.addAttribute("totalPages", page.getTotalPages());
+//        model.addAttribute("totalTickets", page.getTotalElements());
+//        return "fragments.html" ;
+//
+//
+//    }
 
 
     @GetMapping("tickets")
@@ -49,24 +70,15 @@ public class TicketController {
         int pageSize = 5;
         Page<Ticket> page = ticketService.findPage(pageNo, pageSize);
 
-        newList(model, pageSize);
+        List<Ticket> tickets = page.getContent().stream().sorted((a, b) -> (int) (Generator.timeLeft(a) - Generator.timeLeft(b))).collect(Collectors.toList());
+
+        model.addAttribute("tickets", tickets);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalTickets", page.getTotalElements());
 
         return "service/tickets";
 
-    }
-
-    private void newList(Model model, int pageSize) {
-        List<Ticket> tickets = ticketService.findAll();
-
-        tickets = tickets.stream().sorted((a, b) -> (int) (Generator.timeLeft(a) - Generator.timeLeft(b))).collect(Collectors.toList());
-        List<Ticket> newList = new ArrayList<>();
-        for (int i = 0; i < pageSize - 1; i++) {
-            newList.add(tickets.get(i));
-        }
-        model.addAttribute("tickets", newList);
     }
 
     @GetMapping("/tickets/create")

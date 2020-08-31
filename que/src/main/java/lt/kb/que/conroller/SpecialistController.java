@@ -33,12 +33,6 @@ public class SpecialistController {
     @GetMapping("/specialists/{id}")
     public String getSpecialistById(@PathVariable int id, Model model) {
 
-        HttpServletRequest request = null;
-
-//      String user=request.getUserPrincipal();
-        System.out.println("-----------------------------------------------------");
-
-        System.out.println( request.getRemoteUser());
         Optional<Specialist> specialist = specialistService.findById(id);
         if (!specialist.isPresent()) {
             return "error/index";
